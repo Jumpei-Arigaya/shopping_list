@@ -30,3 +30,14 @@ services:
       retries: 10
     volumes:
       - .dbdate:/var/lib/mysql
+
+  front:
+    build:
+      context: .
+      dockerfile: Dockerfile_react
+    restart: always
+    volumes:
+      - ./node:/usr/src/app:cached
+    command: sh -c "cd shopping_list_front && npm run dev"
+    ports:
+      - "3000:3000"
